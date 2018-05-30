@@ -31,5 +31,7 @@ $config['UPLOAD_DIR'] = $config['path_public']  . 'image/';
 $config['UPLOAD_SMALL_DIR'] = $config['path_public']  . 'image/small/';
 
 
-define("DEBUG", 1);
+define("DEBUG", 0);
 define('CONF', __DIR__);
+define('ROOT', __DIR__ . '/..');
+define('WWW', ROOT . '/public');

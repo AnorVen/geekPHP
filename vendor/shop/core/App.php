@@ -9,8 +9,12 @@ class App
     public function __construct()
     {
         $query = trim($_SERVER['QUERY_STRING'], '/');
+        debug($query);
         self::$app = Registry::instance();
         $this->getParams();
+
+        new ErrorHandler();
+        Router::dispatch($query);
 
 
     }
