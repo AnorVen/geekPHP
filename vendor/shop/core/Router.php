@@ -34,25 +34,60 @@ class Router
     public static function dispatch($url)
     {
         if (self::matchRoute($url)) {
-            echo "ok";
+            echo $controller = 'app\controllers\\' . self::$route['prefix'] . self::$route['controller']
+                . 'Controller';
+            if (class_exists($controller)) {
+                $controllerObject = new $controller(self::$route['prefix']);
+                $action = self::lowerCamelCase(self::$route['action']) . 'Action';
+                if(method_exists($controllerObject, $action)){
+                    $controllerObject->$action();
+                }else{
+                    throw new \Exception("Метод $action $controller не найден");
+                }
+            } else {
+                throw new \Exception("Клнтроллер $controller не найден");
+            }
         } else {
-            echo "no";
+            throw new \Exception('page not find', 404);
         }
     }
 
     public static function matchRoute($url)
     {
         foreach (self::$routes as $pattern => $route) {
-
-            debug(preg_match($pattern, $url));
-
             if (preg_match("#{$pattern}#", $url, $matches)) {
-                debug($matches);
+                foreach ($matches as $k => $v) {
+                    if (is_string($k)) {
+                        $route[$k] = $v;
+                    }
+                }
+                if (empty($route['action'])) {
+                    $route['action'] = 'index';
+                }
+
+                if (!isset($route['prefix'])) {
+                    $route['prefix'] = '';
+                } else {
+                    $route['prefix'] .= '\\';
+                }
+
+                $route['controller'] = self::upperCamelCase($route['controller']);
+                self::$route = $route;
                 return true;
             }
         }
         return false;
 
+    }
+
+    protected static function upperCamelCase($name)
+    {
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
+    }
+
+    protected static function lowerCamelCase($name)
+    {
+        return lcfirst(self::upperCamelCase($name));
     }
 
 

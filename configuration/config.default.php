@@ -31,7 +31,24 @@ $config['UPLOAD_DIR'] = $config['path_public']  . 'image/';
 $config['UPLOAD_SMALL_DIR'] = $config['path_public']  . 'image/small/';
 
 
+
+
+
 define("DEBUG", 0);
-define('CONF', __DIR__);
-define('ROOT', __DIR__ . '/..');
-define('WWW', ROOT . '/public');
+define("ROOT", dirname(__DIR__ ));
+define("WWW", ROOT . '/public');
+define("APP", ROOT . '/app');
+define("CORE", ROOT . '/vendor/shop/core');
+define("LIBS", ROOT . '/vendor/shop/core/libs');
+define("CACHE", ROOT . '/tmp/cache');
+define("CONF", ROOT . '/configuration');
+define("LAYOUT", 'default');
+
+// http://ishop2.loc/public/index.php
+$app_path = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
+// http://ishop2.loc/public/
+$app_path = preg_replace("#[^/]+$#", '', $app_path);
+// http://ishop2.loc
+$app_path = str_replace('/public/', '', $app_path);
+define("PATH", $app_path);
+define("ADMIN", PATH . '/admin');

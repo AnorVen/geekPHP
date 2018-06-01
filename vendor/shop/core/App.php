@@ -6,10 +6,11 @@ namespace shop;
 class App
 {
     public static $app;
+
     public function __construct()
     {
         $query = trim($_SERVER['QUERY_STRING'], '/');
-        debug($query);
+        $query = str_replace('path=', '', "$query");
         self::$app = Registry::instance();
         $this->getParams();
 
@@ -19,15 +20,15 @@ class App
 
     }
 
-    protected function getParams(){
+    protected function getParams()
+    {
         $params = require_once CONF . '/params.php';
-        if(!empty($params)){
+        if (!empty($params)) {
             foreach ($params as $k => $v) {
                 self::$app->setProperty($k, $v);
             }
         }
     }
-
 
 
 }
