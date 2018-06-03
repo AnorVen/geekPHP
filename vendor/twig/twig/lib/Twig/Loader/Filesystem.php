@@ -16,7 +16,7 @@
  */
 class Twig_Loader_Filesystem implements Twig_LoaderInterface, Twig_ExistsLoaderInterface, Twig_SourceContextLoaderInterface
 {
-    /** Identifier of the main namespace. */
+    /** Identifier of the Main namespace. */
     const MAIN_NAMESPACE = '__main__';
 
     protected $paths = array();
@@ -56,7 +56,7 @@ class Twig_Loader_Filesystem implements Twig_LoaderInterface, Twig_ExistsLoaderI
     /**
      * Returns the path namespaces.
      *
-     * The main namespace is always defined.
+     * The Main namespace is always defined.
      *
      * @return array The array of defined namespaces
      */

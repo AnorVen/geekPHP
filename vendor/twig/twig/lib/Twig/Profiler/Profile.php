@@ -28,7 +28,7 @@ class Twig_Profiler_Profile implements IteratorAggregate, Serializable
     private $ends = array();
     private $profiles = array();
 
-    public function __construct($template = 'main', $type = self::ROOT, $name = 'main')
+    public function __construct($template = 'Main', $type = self::ROOT, $name = 'Main')
     {
         if (__CLASS__ !== get_class($this)) {
             @trigger_error('Overriding '.__CLASS__.' is deprecated since version 2.4.0 and the class will be final in 3.0.', E_USER_DEPRECATED);

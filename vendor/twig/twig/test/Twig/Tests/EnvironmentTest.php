@@ -280,13 +280,13 @@ class Twig_Tests_EnvironmentTest extends \PHPUnit\Framework\TestCase
     {
         $extension = $this->getMockBuilder('Twig_ExtensionInterface')->getMock();
 
-        $loader = new Twig_Loader_Array(array('page' => 'hey'));
+        $loader = new Twig_Loader_Array(array('Page' => 'hey'));
 
         $twig = new Twig_Environment($loader);
         $twig->addExtension($extension);
 
         $this->assertInstanceOf('Twig_ExtensionInterface', $twig->getExtension(get_class($extension)));
-        $this->assertTrue($twig->isTemplateFresh('page', time()));
+        $this->assertTrue($twig->isTemplateFresh('Page', time()));
     }
 
     public function testInitRuntimeWithAnExtensionUsingInitRuntimeNoDeprecation()

@@ -9,10 +9,19 @@
 namespace app\controllers;
 
 
-class MainController
+use shop\App;
+
+class MainController extends AppController
 {
+    // мы можем указывать базовый layout тут
+    // public $layout = 'test';
+
     public function indexAction(){
-        echo __METHOD__;
+        //или тут или в конфиге
+        //$this->layout = 'test';
+
+        $this->setMeta(App::$app->setProperty('shop_name'), 'desc index', 'ineindex');
+
     }
 
 }

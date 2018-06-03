@@ -34,21 +34,21 @@ class Router
     public static function dispatch($url)
     {
         if (self::matchRoute($url)) {
-            echo $controller = 'app\controllers\\' . self::$route['prefix'] . self::$route['controller']
-                . 'Controller';
+            $controller = 'app\controllers\\' . self::$route['prefix'] . self::$route['controller'] . 'Controller';
             if (class_exists($controller)) {
-                $controllerObject = new $controller(self::$route['prefix']);
+                $controllerObject = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
-                if(method_exists($controllerObject, $action)){
+                if (method_exists($controllerObject, $action)) {
                     $controllerObject->$action();
-                }else{
+                    $controllerObject->getView();
+                } else {
                     throw new \Exception("Метод $action $controller не найден");
                 }
             } else {
                 throw new \Exception("Клнтроллер $controller не найден");
             }
         } else {
-            throw new \Exception('page not find', 404);
+            throw new \Exception('Page not find', 404);
         }
     }
 

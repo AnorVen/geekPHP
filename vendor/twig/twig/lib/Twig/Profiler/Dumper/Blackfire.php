@@ -17,8 +17,8 @@ final class Twig_Profiler_Dumper_Blackfire
     public function dump(Twig_Profiler_Profile $profile)
     {
         $data = array();
-        $this->dumpProfile('main()', $profile, $data);
-        $this->dumpChildren('main()', $profile, $data);
+        $this->dumpProfile('Main()', $profile, $data);
+        $this->dumpChildren('Main()', $profile, $data);
 
         $start = sprintf('%f', microtime(true));
         $str = <<<EOF
