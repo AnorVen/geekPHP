@@ -2,7 +2,6 @@
 
 namespace shop;
 
-
 class App
 {
     public static $app;

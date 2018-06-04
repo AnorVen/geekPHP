@@ -13,23 +13,22 @@ class Registry
 {
     use TSingletone;
 
-    public static $properties = [];
+    protected static $properties = [];
 
     public function setProperty($name, $value)
     {
         self::$properties[$name] = $value;
     }
 
-    public static function getProperty($name)
+    public function getProperty($name)
     {
-        if(isset(self::$properties[$name])){
+        if (isset(self::$properties[$name])) {
             return self::$properties[$name];
         }
         return null;
-
     }
 
-    public function getPropertys()
+    public function getProperties()
     {
         return self::$properties;
     }

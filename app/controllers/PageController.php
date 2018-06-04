@@ -8,8 +8,9 @@
 
 namespace app\controllers;
 
+use shop\App;
 
-class PageController
+class PageController extends AppController
 {
     public function indexAction(){
     }

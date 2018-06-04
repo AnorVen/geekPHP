@@ -7,6 +7,8 @@ require_once 'configuration/config.default.php';
 require_once 'vendor/shop/core/libs/functions.php';
 require_once 'configuration/routes.php';
 
+
+
 new \shop\App();
 
 /*

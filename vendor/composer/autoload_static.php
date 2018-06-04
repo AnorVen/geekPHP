@@ -27,6 +27,14 @@ class ComposerStaticInit1937875afc965c1c1f04ca3f89337ad9
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
+        'R' => 
+        array (
+            'RedBeanPHP\\' => 11,
+        ),
+        'P' => 
+        array (
+            'Psr\\Container\\' => 14,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -45,6 +53,14 @@ class ComposerStaticInit1937875afc965c1c1f04ca3f89337ad9
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'RedBeanPHP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gabordemooij/redbean/RedBeanPHP',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
         ),
     );
 

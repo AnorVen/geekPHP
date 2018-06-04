@@ -6,6 +6,8 @@
     }
   },
   "require": {
-    "twig/twig": "^2.4"
+    "twig/twig": "^2.4",
+    "gabordemooij/redbean": "dev-master",
+    "psr/container": "^1.0"
   }
 }

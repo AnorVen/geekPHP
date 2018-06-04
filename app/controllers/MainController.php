@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use RedBeanPHP\R;
 use shop\App;
 
 class MainController extends AppController
@@ -20,7 +21,10 @@ class MainController extends AppController
         //или тут или в конфиге
         //$this->layout = 'test';
 
-        $this->setMeta(App::$app->setProperty('shop_name'), 'desc index', 'ineindex');
+        $photo = R::findAll('galery');
+        debug($photo);
+
+        $this->setMeta(App::$app->getProperty('shop_name'), 'desc index', 'ineindex');
 
     }
 
