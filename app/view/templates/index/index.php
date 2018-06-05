@@ -13,7 +13,7 @@
         
         <div class="open">
         	
-            <p>now<br>is<br>open!</p>
+            {{ mainText }}
         </div>
         
     </div>

@@ -11,6 +11,7 @@ namespace app\controllers;
 
 use RedBeanPHP\R;
 use shop\App;
+use shop\Cache;
 
 class MainController extends AppController
 {
@@ -21,10 +22,19 @@ class MainController extends AppController
         //или тут или в конфиге
         //$this->layout = 'test';
 
-        $photo = R::findAll('galery');
-        debug($photo);
+        $photos = R::findAll('galery');
+        $cache = Cache::instance();
+        //$cache->set('test', $photos);
+        //$cache->delete('test');
+        $data = $cache->get('test');
+        if(!$data){
+            $cache->set('test', $photos);
+        }
+
 
         $this->setMeta(App::$app->getProperty('shop_name'), 'desc index', 'ineindex');
+        $this->setData(compact('photos'));
+
 
     }
 

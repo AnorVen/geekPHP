@@ -21,6 +21,11 @@ class Db
         if (!R::testConnection()) {
             throw new \Exception('Connect for BD false', 500);
         }
+        R::freeze(true);
+        if(DEBUG){
+            R::debug(true, 1);
+        }
+
 
     }
 }
