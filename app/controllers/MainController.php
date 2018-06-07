@@ -22,7 +22,7 @@ class MainController extends AppController
         //или тут или в конфиге
         //$this->layout = 'test';
 
-        $photos = R::findAll('galery');
+     /*   $photos = R::findAll('galery');
         $cache = Cache::instance();
         //$cache->set('test', $photos);
         //$cache->delete('test');
@@ -30,10 +30,12 @@ class MainController extends AppController
         if(!$data){
             $cache->set('test', $photos);
         }
+        $this->setData(compact('photos'));*/
 
-
+     $brands = R::findAll('brand');
+     $this->setData(compact(brands));
         $this->setMeta(App::$app->getProperty('shop_name'), 'desc index', 'ineindex');
-        $this->setData(compact('photos'));
+
 
 
     }

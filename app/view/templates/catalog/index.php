@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+<?php include_once  'header.php'?>
     
     <!-- Основной блок -->
     <div class="main">
@@ -7,7 +7,7 @@
     <div class="left">
         
         <!-- Меню -->
-	{% include 'menu.html' %}
+	<?php include_once  'menu.php' ?>
         
         <div class="open">
             <p>now<br>is<br>open!</p>
@@ -17,7 +17,7 @@
         
     <!-- Правый блок -->
     <div class="right">
-{% include 'bread_crumbs.html' %}
+<?php include_once  'bread_crumbs.php'?>
     
     
  {% for item in content_data %}    
@@ -37,17 +37,17 @@
         
         
     <!-- Нижняя часть главного блока -->
-	{% include 'brand.html' %}
+	<?php include_once  'brand.php' ?>
         
-	{% include 'instagram.html' %}
+	<?php include_once  'instagram.php' ?>
     
-     {% include 'network.html' %}
+     <?php include_once  'network.php' ?>
     </div>
     
      
     
     </div>
-	{% include 'footer.html' %} 
+	<?php include_once  'footer.php' ?>
 </body>
     
 </html>

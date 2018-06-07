@@ -7,12 +7,12 @@ require_once 'configuration/config.default.php';
 require_once 'vendor/shop/core/libs/functions.php';
 require_once 'configuration/routes.php';
 
-$loader = new Twig_Loader_Filesystem('../app/view/templates/');
+/*$loader = new Twig_Loader_Filesystem('../app/view/templates/');
 $twig = new Twig_Environment($loader, array(
     'cache' => CACHE . '/',
 ));
 
-$template = $twig->loadTemplate('index/index.php');
+$template = $twig->loadTemplate('index/index.php');*/
 
 new \shop\App();
 

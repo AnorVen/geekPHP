@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+<?php include_once  'header.php';  ?>
     
     <!-- Основной блок -->
     <div class="main">
@@ -7,7 +7,7 @@
     <div class="left">
         
         <!-- Меню -->
-	{% include 'menu.html' %}
+	<?php include_once  'menu.php' ?>
         
         <div class="open">
             <p>now<br>is<br>open!</p>
@@ -17,17 +17,17 @@
         
     <!-- Правый блок -->
     <div class="right">
-        {% include 'bread_crumbs.html' %}
+        <?php include_once  'bread_crumbs.php' ?>
         
-        {% include 'catalog/product_info.php' %}
+        <?php include_once  'catalog/product_info.php' ?>
 
      
      
-        {% include 'top-product.html' %} 
+        <?php include_once  'top-product.php'?>
         
-		{% include 'new-product.html' %}
+		<?php include_once  'new-product.php' ?>
         
-        {% include 'network.html' %}
+        <?php include_once  'network.php' ?>
 
         </div>
     </div>
@@ -36,7 +36,7 @@
     
     </div>
 
-	{% include 'footer.html' %}    
+	<?php include_once  'footer.php' ?>
 
 </body>
     

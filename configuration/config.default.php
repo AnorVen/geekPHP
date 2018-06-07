@@ -42,7 +42,7 @@ define("CORE", ROOT . '/vendor/shop/core');
 define("LIBS", ROOT . '/vendor/shop/core/libs');
 define("CACHE", ROOT . '/tmp/cache');
 define("CONF", ROOT . '/configuration');
-define("LAYOUT", 'default');
+define("LAYOUT", 'labaz');
 
 // http://ishop2.loc/public/index.php
 $app_path = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
