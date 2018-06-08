@@ -717,12 +717,16 @@ figure.effect-bubba:hover p, figure.effect-bubba:hover h2 {
 .product-main {
     padding: 1em 0px 2.7em 0px;
     border: 1px solid #ECEAEA;
+    margin-bottom: 10px;
 }
 
 .product {
     padding: 3em 0px 6em 0px;
 }
-
+.product .old_price{
+    text-decoration: line-through;
+    color: red;
+}
 .product-bottom h3 {
     font-size: 16px;
     color: #000;
@@ -3755,3 +3759,8 @@ h3.ghj {
 }
 
 /*--media-quaries-end-here--*/
+
+
+.add-to-cart-link{}
+
+

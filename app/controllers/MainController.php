@@ -33,7 +33,9 @@ class MainController extends AppController
         $this->setData(compact('photos'));*/
 
      $brands = R::findAll('brand');
-     $this->setData(compact(brands));
+
+     $hits = R::findAll("product", "hit = '1' and status = '1' LIMIT 8");
+     $this->setData(compact(brands, hits));
         $this->setMeta(App::$app->getProperty('shop_name'), 'desc index', 'ineindex');
 
 
