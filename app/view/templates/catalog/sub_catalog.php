@@ -7,7 +7,7 @@
     <div class="left">
         
         <!-- Меню -->
-	<?php include_once  'menu.php'?>
+	<?php include_once  'menu_base.php'?>
 
         
         <div class="open">

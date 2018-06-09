@@ -18,7 +18,8 @@
 <!--banner-ends-->
 
 <!--about-starts-->
-<?php if ($brands) : ?>
+<?php if($brands) : ?>
+    <?php $curr = \shop\App::$app->getProperty('currency'); ?>
 	<div class="about">
 		<div class="container">
 			<div class="about-top grid-1">
@@ -56,14 +57,20 @@
 										<h3><?= $hit->title ?></h3>
 										<p>Explore Now</p>
 										<h4><a class="add-to-cart-link" href="/product/<?= $hit->id; ?>"><i></i></a>
-											<span class=" item_price">$ <?= $hit->price ?></span>
-											<?php if($hit->old_price != 0):?>
-												<span class="old_price"><?=$hit->old_price; ?></span>
-											<?php endif?>
+											<span
+													class=" item_price">
+													<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $hit->price * $curr['value'] : $hit->price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
+											</span>
+                        <?php if ($hit->old_price != 0): ?>
+													<span class="old_price">
+															<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $hit->old_price * $curr['value'] : $hit->old_price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
+													</span>
+                        <?php endif ?>
 										</h4>
 									</div>
 									<div class="srch">
-										<span><?=$hit->old_price ?  (round(($hit->old_price - $hit->price) / $hit->old_price * 100) != 0 ? round(($hit->old_price - $hit->price) / $hit->old_price *100) : '10' ) . '%' : 'Выбор покупателей :)' ?>
+										<span>
+												<?= $hit->old_price ? (round(($hit->old_price - $hit->price) / $hit->old_price * 100) != 0 ? round(($hit->old_price - $hit->price) / $hit->old_price * 100) : '10') . '%' : 'Выбор покупателей :)' ?>
 											</span>
 									</div>
 								</div>

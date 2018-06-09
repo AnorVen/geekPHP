@@ -33,7 +33,7 @@ class __TwigTemplate_73b7b53adac5709f5f4f3970455030781f0ca67b0f1695c60e823d614dd
         
 \t\t";
         // line 11
-        $this->loadTemplate("menu.php", "index/index.php", 11)->display($context);
+        $this->loadTemplate("menu_base.php", "index/index.php", 11)->display($context);
         // line 12
         echo "        
         
