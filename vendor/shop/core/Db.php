@@ -10,6 +10,7 @@ namespace shop;
 
 use \RedBeanPHP\R as R;
 
+
 class Db
 {
     use TSingletone;

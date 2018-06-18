@@ -55,24 +55,47 @@ class Menu
                 $this->data = $categoryes = R::getAssoc("SELECT * FROM {$this->table}");
 
             }
+            $this->tree = $this->getTree();
+            $this->menuHtml = $this->getMenuHtml($this->tree);
+            if()
         }
-        $this->ooutput();
+        $this->output();
 
     }
 
-    public function ooutput()
+    public function output()
     {
         echo $this->menuHtml;
     }
 
-    protected function getTree(){
-
+    protected function getTree()
+    {
+        $tree = [];
+        $data = $this->data;
+        foreach ($data as $id => &$node) {
+            if (!$node['parent_id']) {
+                $tree[$id] = &$node;
+            } else {
+                $data[$node['parent_id']]['childs'][$id] = &$node;
+            }
+        }
+        return $tree;
     }
 
-    protected function getMenuHtml($tree, $tab = ''){
-
+    protected function getMenuHtml($tree, $tab = '')
+    {
+        $str = '';
+        foreach ($tree as $id => $category) {
+            $str .= $this->categoryToTemplate($category, $tab, $id);
+        }
+        return $str;
     }
-    protected function categoryToTemplate($category, $tab, $id){
+
+    protected function categoryToTemplate($category, $tab, $id)
+    {
+        ob_start();
+        require_once $this->tpl;
+        return ob_get_clean();
     }
 
 }
