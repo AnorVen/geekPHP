@@ -7,16 +7,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-    <?=$this->getMeta();?>
-	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <?= $this->getMeta(); ?>
+	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
 	<!--Custom-Theme-files-->
+	<link href="/megamenu/css/ionicons.min.css" rel="stylesheet" type="text/css" media="all"/>
+	<link href="/megamenu/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+	<link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen"/>
 	<!--theme-style-->
-	<link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 	<!--//theme-style-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!--start-menu-->
-	<link href="/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
 <!--top-header-->
@@ -27,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="drop">
 					<div class="box">
 						<select id="currency" tabindex="4" class="dropdown drop">
-							<?php new \app\widgets\currency\Currency(); ?>
+                <?php new \app\widgets\currency\Currency(); ?>
 						</select>
 					</div>
 					<div class="box1">
@@ -46,10 +47,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<a href="/checkout.html">
 						<div class="total">
 							<span class="simpleCart_total"></span></div>
-						<img src="/images/cart-1.png" alt="" />
+						<img src="/images/cart-1.png" alt=""/>
 					</a>
 					<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-					<div class="clearfix"> </div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -59,7 +60,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--top-header-->
 <!--start-logo-->
 <div class="logo">
-	<a href="/index.html"><h1>Luxury Watches</h1></a>
+	<a href="<?= PATH ?>"><h1>Luxury Watches</h1></a>
 </div>
 <!--start-logo-->
 <!--bottom-header-->
@@ -206,28 +207,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>-->
 
 				<div class="menu">
-					<?php new \app\widgets\menu\Menu([
-							'containet' => 'ul',
+            <?php new \app\widgets\menu\Menu([
+                'containet' => 'ul',
 
 
-					]) ?>
+            ]) ?>
 				</div>
-				<div class="clearfix"> </div>
+				<div class="clearfix"></div>
 			</div>
 			<div class="col-md-3 header-right">
 				<div class="search-bar">
-					<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+					<input type="text" value="Search" onfocus="this.value = '';"
+								 onblur="if (this.value == '') {this.value = 'Search';}">
 					<input type="submit" value="">
 				</div>
 			</div>
-			<div class="clearfix"> </div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 </div>
 <!--bottom-header-->
 
 <div class="content">
-    <?=$content;?>
+    <?= $content; ?>
 </div>
 
 <!--information-starts-->
@@ -281,12 +283,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="footer-top">
 			<div class="col-md-6 footer-left">
 				<form>
-					<input type="text" value="Enter Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter Your Email';}">
+					<input type="text" value="Enter Your Email" onfocus="this.value = '';"
+								 onblur="if (this.value == '') {this.value = 'Enter Your Email';}">
 					<input type="submit" value="Subscribe">
 				</form>
 			</div>
 			<div class="col-md-6 footer-right">
-				<p>© 2015 Luxury Watches. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+				<p>© 2015 Luxury Watches. All Rights Reserved | Design by <a href="http://w3layouts.com/"
+																																		 target="_blank">W3layouts</a>
+				</p>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -294,34 +299,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!--footer-end-->
 <script src="/js/jquery-1.11.0.min.js"></script>
-<script src="/js/simpleCart.min.js"> </script>
-<script type="text/javascript" src="/js/memenu.js"></script>
-<script>$(document).ready(function(){$(".memenu").memenu();});</script>
+<script src="/js/simpleCart.min.js"></script>
+<script src="/js/imagezoom.js"></script>
+<script defer src="/js/jquery.flexslider.js"></script>
 <!--dropdown-->
 <script src="/js/jquery.easydropdown.js"></script>
 <!--Slider-Starts-Here-->
 <script src="/js/responsiveslides.min.js"></script>
-<script>
-  // You can also use "$(window).load(function() {"
-  $(function () {
-    // Slideshow 4
-    $("#slider4").responsiveSlides({
-      auto: true,
-      pager: true,
-      nav: true,
-      speed: 500,
-      namespace: "callbacks",
-      before: function () {
-        $('.events').append("<li>before event fired.</li>");
-      },
-      after: function () {
-        $('.events').append("<li>after event fired.</li>");
-      }
-    });
-
-  });
-</script>
+<script src="/megamenu/js/megamenu.js"></script>
 <script src="/js/main.js"></script>
+
+
 <!--End-slider-script-->
 </body>
 </html>
