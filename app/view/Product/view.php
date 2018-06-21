@@ -11,6 +11,9 @@
 </div>
 <!--end-breadcrumbs-->
 <!--start-single-->
+<!--start-single-->
+<!--start-single-->
+<!--start-single-->
 
 <?php $curr = \shop\App::$app->getProperty('currency'); ?>
 <?php $cats = \shop\App::$app->getProperty('categories');
