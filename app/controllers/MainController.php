@@ -19,24 +19,11 @@ class MainController extends AppController
     // public $layout = 'test';
 
     public function indexAction(){
-        //или тут или в конфиге
-        //$this->layout = 'test';
-
-     /*   $photos = R::findAll('galery');
-        $cache = Cache::instance();
-        //$cache->set('test', $photos);
-        //$cache->delete('test');
-        $data = $cache->get('test');
-        if(!$data){
-            $cache->set('test', $photos);
-        }
-        $this->setData(compact('photos'));*/
 
      $brands = R::findAll('brand');
-
      $hits = R::findAll("product", "hit = '1' and status = '1' LIMIT 8");
-     $this->setData(compact(brands, hits));
-        $this->setMeta(App::$app->getProperty('shop_name'), 'desc index', 'ineindex');
+     $this->setData(compact('brands', 'hits'));
+     $this->setMeta(App::$app->getProperty('shop_name'), 'desc index', 'ineindex');
 
 
 

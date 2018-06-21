@@ -11,6 +11,9 @@
 </div>
 <!--end-breadcrumbs-->
 <!--start-single-->
+
+<?php $curr = \shop\App::$app->getProperty('currency'); ?>
+<?php $cats = \shop\App::$app->getProperty('categories'); ?>
 <div class="single contact">
 	<div class="container">
 		<div class="single-main">
@@ -38,8 +41,8 @@
 
 					</div>
 					<div class="col-md-7 single-top-right">
-						<div class="single-para simpleCart_shelfItem">
-							<h2>Lorem Ipsum</h2>
+						<div class="single-para simpleCart_shelfItem product">
+							<h2><?=$product['title'] ?></h2>
 							<div class="star-on">
 								<ul class="star-footer">
 									<li><a href="#"><i> </i></a></li>
@@ -55,7 +58,17 @@
 								<div class="clearfix"></div>
 							</div>
 
-							<h5 class="item_price">$ 95.00</h5>
+							<h5 class="item_price">
+								<span
+										class="">
+													<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $product->price * $curr['value'] : $product->price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
+											</span>
+                  <?php if ($product->old_price != 0): ?>
+										<span class="old_price">
+															<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $product->old_price * $curr['value'] : $product->old_price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
+													</span>
+                  <?php endif ?>
+							</h5>
 							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
 								euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
 								minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
