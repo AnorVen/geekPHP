@@ -13,11 +13,11 @@
 <!--start-single-->
 
 <?php $curr = \shop\App::$app->getProperty('currency'); ?>
-<?php $cats = \shop\App::$app->getProperty('categories'); ?>
+<?php $cats = \shop\App::$app->getProperty('categories');
+?>
 <div class="single contact">
 	<div class="container">
 		<div class="single-main">
-        <?= debug($product); ?>
 			<div class="col-md-9 single-main-left">
 				<div class="sngl-top">
 					<div class="col-md-5 single-top-left">
@@ -42,7 +42,7 @@
 					</div>
 					<div class="col-md-7 single-top-right">
 						<div class="single-para simpleCart_shelfItem product">
-							<h2><?=$product['title'] ?></h2>
+							<h2><?= $product['title'] ?></h2>
 							<div class="star-on">
 								<ul class="star-footer">
 									<li><a href="#"><i> </i></a></li>
@@ -69,10 +69,7 @@
 													</span>
                   <?php endif ?>
 							</h5>
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-								euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-								minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-								aliquip ex ea commodo consequat.</p>
+							<p><?= $product->content ?></p>
 							<div class="available">
 								<ul>
 									<li>Color
@@ -93,12 +90,16 @@
 								</ul>
 							</div>
 							<ul class="tag-men">
-								<li><span>TAG</span>
-									<span class="women1">: Women,</span></li>
-								<li><span>SKU</span>
-									<span class="women1">: CK09</span></li>
+								<li><span>Category</span>
+									<span>: <a href="<?= $cats[$product->category_id]['alias'] ?>">
+											"<?= $cats[$product->category_id]['title'] ?>
+										</a></span></li>
 							</ul>
-							<a href="#" class="add-cart item_add">ADD TO CART</a>
+							<div class="quantity">
+								<input type="number" size="4" class="input-text" value="1" name="quantity" min="1" step="1">
+								<a href="/card/add?id=<?= $product->id ?>" id="productAdd" data-id="<?= $product->id ?>" class="add-cart item_add add-to-cart-link">ADD TO CART</a>
+							</div>
+
 
 						</div>
 					</div>
@@ -180,56 +181,33 @@
 						</li>
 					</ul>
 				</div>
+
+				<?php if($related):?>
 				<div class="latestproducts">
+
 					<div class="product-one">
+<h4>recomendet product</h4>
+						<?php foreach ($related as $item):?>
 						<div class="col-md-4 product-left p-left">
 							<div class="product-main simpleCart_shelfItem">
-								<a href="single.html" class="mask"><img class="img-responsive zoom-img"
-																												src="/images/p-1.png" alt=""/></a>
+								<a href="/product/<?=$item['alias']?>" class="mask">
+									<img class="img-responsive zoom-img" src="/images/<?= /*file_exists('/images/' . $item['img']) ? $item['img'] : 'no_image.jpg'*/  $item['img']?>" alt=""/></a>
 								<div class="product-bottom">
-									<h3>Smart Watches</h3>
+									<h3><?=$item['title']?></h3>
 									<p>Explore Now</p>
 									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price">$ 329</span></h4>
+												class=" item_price"><?=$item['price']?></span></h4>
 								</div>
 								<div class="srch">
-									<span>-50%</span>
+									<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 product-left p-left">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="single.html" class="mask"><img class="img-responsive zoom-img"
-																												src="/images/p-2.png" alt=""/></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 product-left p-left">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="single.html" class="mask"><img class="img-responsive zoom-img"
-																												src="/images/p-3.png" alt=""/></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
-							</div>
-						</div>
+						<?php endforeach; ?>
 						<div class="clearfix"></div>
 					</div>
 				</div>
+          <?php endif;?>
 			</div>
 			<div class="col-md-3 single-right">
 				<div class="w_sidebar">

@@ -25,6 +25,9 @@ class ProductController extends AppController
 
         // получить связанные товары
 
+        $related = R::getAll('SELECT * FROM related_product JOIN product ON product.id = related_product.related_id WHERE related_product.product_id = ?', [$product->id]);
+
+
         //просмотренные товары - запись куки
 
         //просмотренные товары - получить из куки
@@ -34,7 +37,7 @@ class ProductController extends AppController
         //получить все модификации товара, если есть
 
         $this->setMeta($product->title, $product->desc, $product->keywords);
-        $this->setData(compact('product'));
+        $this->setData(compact('product', 'related'));
 
 
     }

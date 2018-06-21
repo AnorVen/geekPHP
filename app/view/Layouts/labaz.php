@@ -173,7 +173,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/megamenu/js/megamenu.js"></script>
 <script src="/js/main.js"></script>
 
+<?php
 
+$logs = \RedBeanPHP\R::getDatabaseAdapter()->getDatabase()->getLogger();
+debug( $logs->grep('SELECT'))
+?>
 <!--End-slider-script-->
 </body>
 </html>

@@ -51,9 +51,9 @@ class Menu
         $cache = Cache::instance();
         $this->menuHtml = $cache->get($this->cacheKey);
         if (!$this->menuHtml) {
-            $this->data = App::$app->getProperty('categoryes');
+            $this->data = App::$app->getProperty('categories');
             if (!$this->data) {
-                $this->data = $categoryes = R::getAssoc("SELECT * FROM {$this->table}");
+                $this->data = $categories = R::getAssoc("SELECT * FROM {$this->table}");
 
             }
             $this->tree = $this->getTree();
