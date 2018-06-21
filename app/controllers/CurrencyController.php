@@ -13,15 +13,16 @@ use RedBeanPHP\R;
 
 class CurrencyController extends AppController
 {
-    function changeAction(){
+    function changeAction()
+    {
         $currency = !empty($_GET['curr']) ? $_GET['curr'] : null;
-        if($currency){
+        if ($currency) {
             $curr = R::findOne('currency', 'code = ?', [$currency]);
-            if($curr){
-                setcookie('currency', $currency, time() +3600 * 24, '/');
+            if ($curr) {
+                setcookie('currency', $currency, time() + 3600 * 24, '/');
             }
         }
-        redirect();
+       redirect();
 
     }
 

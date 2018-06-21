@@ -7,7 +7,7 @@ function debug($arr){
 function redirect($http = false){
     if($http){
         $redirect = $http;
-    } else {
+    }else{
         $redirect = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : PATH;
     }
     header("Location: $redirect");

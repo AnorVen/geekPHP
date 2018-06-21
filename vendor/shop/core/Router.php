@@ -25,7 +25,7 @@ class Router
         return self::$routes;
     }
 
-    public static function getRoute(): array
+    public static function getRoute()
     {
         return self::$route;
     }

@@ -1,7 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Efremov.georgiy
- * Date: 09.06.2018
- * Time: 18:52
- */
+<li>
+	<a href="category/<?=$category['alias'];?>"><?=$category['title'];?></a>
+    <?php if(isset($category['childs'])): ?>
+        <ul class="subMenu">
+            <?= $this->getMenuHtml($category['childs']);?>
+        </ul>
+    <?php endif; ?>
+</li>

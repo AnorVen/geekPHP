@@ -30,13 +30,13 @@ class AppController extends Controller
     static function CacheCategory()
     {
         $cache = Cache::instance();
-        $categoryes = $cache->get('categoryes');
-        if(!$categoryes){
-            $categoryes = R::getAssoc("SELECT * FROM category");
-            $cache->set('categoryes', $categoryes);
+        $categories = $cache->get('categoryes');
+        if (!$categories) {
+            $categories = R::getAssoc("SELECT * FROM category");
+            $cache->set('categories', $categories);
 
         }
-        return $categoryes;
+        return $categories;
     }
 
 }

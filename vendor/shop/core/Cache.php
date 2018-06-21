@@ -13,11 +13,11 @@ class Cache
 {
     use TSingletone;
 
-    public function set($key, $data, $time = 3600)
+    public function set($key, $data, $seconds = 3600)
     {
-        if ($time) {
+        if ($seconds) {
             $content['data'] = $data;
-            $content['end_time'] = time() + $time;
+            $content['end_time'] = time() + $seconds;
             if (file_put_contents(CACHE . '/' . md5($key) . '.txt', serialize($content))) {
                 return true;
             }
