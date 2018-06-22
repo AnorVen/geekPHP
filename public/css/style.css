@@ -3220,3 +3220,8 @@ form .has-error .form-control{
 	top:50vh;
 	margin:-100px 0 0 -100px;
 }
+
+.product-bottom h4 .old_price{
+	color: red;
+	text-decoration: line-through;
+}

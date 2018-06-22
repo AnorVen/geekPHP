@@ -26,8 +26,9 @@
 					<div class="col-md-5 single-top-left">
 						<div class="flexslider">
 							<ul class="slides">
-								<li data-thumb="/images/s-1.jpg">
-									<div class="thumb-image"><img src="/images/s-1.jpg" data-imagezoom="true"
+								<li data-thumb="/images/<?= $product['img']?>">
+									<div class="thumb-image">
+										<img src="/images/s-1.jpg" data-imagezoom="true"
 																								class="img-responsive" alt=""/></div>
 								</li>
 								<li data-thumb="/images/s-2.jpg">
@@ -99,8 +100,11 @@
 										</a></span></li>
 							</ul>
 							<div class="quantity">
-								<input type="number" size="4" class="input-text" value="1" name="quantity" min="1" step="1">
-								<a href="/card/add?id=<?= $product->id ?>" id="productAdd" data-id="<?= $product->id ?>" class="add-cart item_add add-to-cart-link">ADD TO CART</a>
+								<input type="number" size="4" class="input-text" value="1" name="quantity" min="1"
+											 step="1">
+								<a href="/card/add?id=<?= $product->id ?>" id="productAdd"
+									 data-id="<?= $product->id ?>" class="add-cart item_add add-to-cart-link">ADD TO
+									CART</a>
 							</div>
 
 
@@ -185,32 +189,37 @@
 					</ul>
 				</div>
 
-				<?php if($related):?>
-				<div class="latestproducts">
+          <?php if ($related): ?>
+						<div class="latestproducts">
 
-					<div class="product-one">
-<h4>recomendet product</h4>
-						<?php foreach ($related as $item):?>
-						<div class="col-md-4 product-left p-left">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="/product/<?=$item['alias']?>" class="mask">
-									<img class="img-responsive zoom-img" src="/images/<?= /*file_exists('/images/' . $item['img']) ? $item['img'] : 'no_image.jpg'*/  $item['img']?>" alt=""/></a>
-								<div class="product-bottom">
-									<h3><?=$item['title']?></h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price"><?=$item['price']?></span></h4>
-								</div>
-								<div class="srch">
-									<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
-								</div>
+							<div class="product-one">
+								<h4>recomendet product</h4>
+                  <?php foreach ($related as $item): ?>
+										<div class="col-md-4 product-left p-left">
+											<div class="product-main simpleCart_shelfItem">
+												<a href="/product/<?= $item['alias'] ?>" class="mask">
+													<img class="img-responsive zoom-img"
+															 src="/images/<?= /*file_exists('/images/' . $item['img']) ? $item['img'] : 'no_image.jpg'*/
+                               $item['img'] ?>" alt=""/></a>
+												<div class="product-bottom">
+													<h3><?= $item['title'] ?></h3>
+													<p>Explore Now</p>
+
+													<h4><a href="/card/add?id=<?= $item['id'] ?>" id="productAdd"
+																 data-id="<?= $item['id'] ?>"
+																 class="add-cart item_add add-to-cart-link">ADD TO CART</a></h4>
+														<p class=" item_price">	<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
+												</div>
+												<div class="srch">
+													<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
+												</div>
+											</div>
+										</div>
+                  <?php endforeach; ?>
+								<div class="clearfix"></div>
 							</div>
 						</div>
-						<?php endforeach; ?>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-          <?php endif;?>
+          <?php endif; ?>
 			</div>
 			<div class="col-md-3 single-right">
 				<div class="w_sidebar">
