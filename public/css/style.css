@@ -3225,3 +3225,12 @@ form .has-error .form-control{
 	color: red;
 	text-decoration: line-through;
 }
+.old_price{
+	color: red;
+	text-decoration: line-through;
+}
+
+img{
+	height: auto;
+	max-width: 100%;
+}
