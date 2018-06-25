@@ -9,6 +9,8 @@
 namespace app\controllers;
 
 
+use app\models\Breadcrumbs;
+use app\models\Product;
 use RedBeanPHP\R;
 
 class ProductController extends AppController
@@ -23,6 +25,8 @@ class ProductController extends AppController
 
         // получить хлебные крошки
 
+        $breadcrumbs = Breadcrumbs::getBreadcrumbs($product->category_id, $product->title);
+
         // получить связанные товары
 
         $related = R::getAll('SELECT * FROM related_product JOIN product ON product.id = related_product.related_id WHERE related_product.product_id = ?', [$product->id]);
@@ -30,7 +34,15 @@ class ProductController extends AppController
 
         //просмотренные товары - запись куки
 
+        $p_model = new Product();
+        $p_model->setRecentlyViewed($product->id);
+
         //просмотренные товары - получить из куки
+        $r_viewed = $p_model->getRecentlyViewed($product->id);
+        $recentlyViewed = NULL;
+        if($r_viewed){
+            $recentlyViewed = R::find('product', 'id IN (' . R::genSlots($r_viewed) .') LIMIT 3', $r_viewed);
+        }
 
         //галерея
 
@@ -38,8 +50,14 @@ class ProductController extends AppController
 
         //получить все модификации товара, если есть
 
+
+
+
+
+
+
         $this->setMeta($product->title, $product->desc, $product->keywords);
-        $this->setData(compact('product', 'related', 'gallery'));
+        $this->setData(compact('product', 'related', 'gallery', 'recentlyViewed'));
 
 
     }

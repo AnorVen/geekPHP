@@ -4,6 +4,7 @@
 		<div class="breadcrumbs-main">
 			<ol class="breadcrumb">
 				<li><a href="<?= PATH ?>">Home</a></li>
+				<li><a href="<?= PATH ?>">Home</a></li>
 				<li class="active">Single</li>
 			</ol>
 		</div>
@@ -225,6 +226,40 @@
 							</div>
 						</div>
           <?php endif; ?>
+
+          <?php if ($recentlyViewed): ?>
+						<div class="latestproducts">
+
+							<div class="product-one">
+								<h4>recentlyViewed</h4>
+                  <?php foreach ($recentlyViewed as $item): ?>
+										<div class="col-md-4 product-left p-left">
+											<div class="product-main simpleCart_shelfItem">
+												<a href="/product/<?= $item['alias'] ?>" class="mask">
+													<img class="img-responsive zoom-img"
+															 src="/images/<?= /*file_exists('/images/' . $item['img']) ? $item['img'] : 'no_image.jpg'*/
+                               $item['img'] ?>" alt=""/></a>
+												<div class="product-bottom">
+													<h3><?= $item['title'] ?></h3>
+													<p>Explore Now</p>
+
+													<h4><a href="/card/add?id=<?= $item['id'] ?>" id="productAdd"
+																 data-id="<?= $item['id'] ?>"
+																 class="add-cart item_add add-to-cart-link">ADD TO CART</a></h4>
+													<p class=" item_price">	<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
+												</div>
+												<div class="srch">
+													<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
+												</div>
+											</div>
+										</div>
+                  <?php endforeach; ?>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+          <?php endif; ?>
+			</div>
+
 			</div>
 			<div class="col-md-3 single-right">
 				<div class="w_sidebar">
