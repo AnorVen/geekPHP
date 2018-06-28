@@ -3,9 +3,11 @@
 	<div class="container">
 		<div class="breadcrumbs-main">
 			<ol class="breadcrumb">
-				<li><a href="<?= PATH ?>">Home</a></li>
-				<li><a href="<?= PATH ?>">Home</a></li>
-				<li class="active">Single</li>
+				<!--	<li><a href="<? /*= PATH */ ?>">Home</a></li>
+				<li><a href="<? /*= PATH */ ?>">Home</a></li>
+				<li class="active">Single</li>-->
+
+          <?= $breadcrumbs ?>
 			</ol>
 		</div>
 	</div>
@@ -26,29 +28,28 @@
 				<div class="sngl-top">
 					<div class="col-md-5 single-top-left">
 
-						<?php if($gallery): ?>
-						<div class="flexslider">
-							<ul class="slides">
-								<?php foreach ($gallery as $img ): ?>
-								<li data-thumb="/images/<?= $img->img?>">
-									<div class="thumb-image">
-										<img src="/images//<?= $img->img?>" data-imagezoom="true"
-																								class="img-responsive" alt=""/></div>
-								</li>
-								<?php endforeach; ?>
+              <?php if ($gallery): ?>
+								<div class="flexslider">
+									<ul class="slides">
+                      <?php foreach ($gallery as $img): ?>
+												<li data-thumb="/images/<?= $img->img ?>">
+													<div class="thumb-image">
+														<img src="/images/<?= $img->img ?>" data-imagezoom="true"
+																 class="img-responsive" alt=""/></div>
+												</li>
+                      <?php endforeach; ?>
 
-							</ul>
-						</div>
+									</ul>
+								</div>
 
 
-						<!-- FlexSlider -->
+								<!-- FlexSlider -->
 
               <?php else: ?>
-							<img src="/images/<?= $product->img?>" alt="">
+								<img src="/images/<?= $product->img ?>" alt="">
 
 
-
-						<?php endif; ?>
+              <?php endif; ?>
 					</div>
 					<div class="col-md-7 single-top-right">
 						<div class="single-para simpleCart_shelfItem product">
@@ -84,18 +85,16 @@
 								<ul>
 									<li>Color
 										<select>
-											<option>Silver</option>
-											<option>Black</option>
-											<option>Dark Black</option>
-											<option>Red</option>
-										</select></li>
-									<li class="size-in">Size<select>
-											<option>Large</option>
-											<option>Medium</option>
-											<option>small</option>
-											<option>Large</option>
-											<option>small</option>
-										</select></li>
+											<option value="0">выбрать цвет</option>
+
+											<?php foreach ($mods as $item => $val): ?>
+											<option>
+
+											</option>
+											<?php endforeach ?>
+
+										</select>
+									</li>
 									<div class="clearfix"></div>
 								</ul>
 							</div>
@@ -214,7 +213,7 @@
 													<h4><a href="/card/add?id=<?= $item['id'] ?>" id="productAdd"
 																 data-id="<?= $item['id'] ?>"
 																 class="add-cart item_add add-to-cart-link">ADD TO CART</a></h4>
-														<p class=" item_price">	<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
+													<p class=" item_price">  <?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
 												</div>
 												<div class="srch">
 													<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
@@ -246,7 +245,7 @@
 													<h4><a href="/card/add?id=<?= $item['id'] ?>" id="productAdd"
 																 data-id="<?= $item['id'] ?>"
 																 class="add-cart item_add add-to-cart-link">ADD TO CART</a></h4>
-													<p class=" item_price">	<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
+													<p class=" item_price">  <?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
 												</div>
 												<div class="srch">
 													<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
@@ -260,94 +259,95 @@
           <?php endif; ?>
 			</div>
 
-			</div>
-			<div class="col-md-3 single-right">
-				<div class="w_sidebar">
-					<section class="sky-form">
-						<h4>Catogories</h4>
-						<div class="row1 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>All
-									Accessories</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Women Watches</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kids
-									Watches</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Men
-									Watches</label>
-							</div>
-						</div>
-					</section>
-					<section class="sky-form">
-						<h4>Brand</h4>
-						<div class="row1 row2 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>kurtas</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sonata</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Titan</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Casio</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Omax</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>shree</label>
-								<label class="checkbox"><input type="checkbox"
-																							 name="checkbox"><i></i>Fastrack</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sports</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Fossil</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Maxima</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Yepme</label>
-								<label class="checkbox"><input type="checkbox"
-																							 name="checkbox"><i></i>Citizen</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Diesel</label>
-							</div>
-						</div>
-					</section>
-					<section class="sky-form">
-						<h4>Colour</h4>
-						<ul class="w_nav2">
-							<li><a class="color1" href="#"></a></li>
-							<li><a class="color2" href="#"></a></li>
-							<li><a class="color3" href="#"></a></li>
-							<li><a class="color4" href="#"></a></li>
-							<li><a class="color5" href="#"></a></li>
-							<li><a class="color6" href="#"></a></li>
-							<li><a class="color7" href="#"></a></li>
-							<li><a class="color8" href="#"></a></li>
-							<li><a class="color9" href="#"></a></li>
-							<li><a class="color10" href="#"></a></li>
-							<li><a class="color12" href="#"></a></li>
-							<li><a class="color13" href="#"></a></li>
-							<li><a class="color14" href="#"></a></li>
-							<li><a class="color15" href="#"></a></li>
-							<li><a class="color5" href="#"></a></li>
-							<li><a class="color6" href="#"></a></li>
-							<li><a class="color7" href="#"></a></li>
-							<li><a class="color8" href="#"></a></li>
-							<li><a class="color9" href="#"></a></li>
-							<li><a class="color10" href="#"></a></li>
-						</ul>
-					</section>
-					<section class="sky-form">
-						<h4>discount</h4>
-						<div class="row1 row2 scroll-pane">
-							<div class="col col-4">
-								<label class="radio"><input type="radio" name="radio" checked=""><i></i>60 % and
-									above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>50 % and above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>40 % and above</label>
-							</div>
-							<div class="col col-4">
-								<label class="radio"><input type="radio" name="radio"><i></i>30 % and above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>20 % and above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>10 % and above</label>
-							</div>
-						</div>
-					</section>
-				</div>
-			</div>
-			<div class="clearfix"></div>
 		</div>
+		<div class="col-md-3 single-right">
+			<div class="w_sidebar">
+				<section class="sky-form">
+					<h4>Catogories</h4>
+					<div class="row1 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>All
+								Accessories</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Women
+								Watches</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kids
+								Watches</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Men
+								Watches</label>
+						</div>
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>Brand</h4>
+					<div class="row1 row2 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>kurtas</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sonata</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Titan</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Casio</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Omax</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>shree</label>
+							<label class="checkbox"><input type="checkbox"
+																						 name="checkbox"><i></i>Fastrack</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sports</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Fossil</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Maxima</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Yepme</label>
+							<label class="checkbox"><input type="checkbox"
+																						 name="checkbox"><i></i>Citizen</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Diesel</label>
+						</div>
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>Colour</h4>
+					<ul class="w_nav2">
+						<li><a class="color1" href="#"></a></li>
+						<li><a class="color2" href="#"></a></li>
+						<li><a class="color3" href="#"></a></li>
+						<li><a class="color4" href="#"></a></li>
+						<li><a class="color5" href="#"></a></li>
+						<li><a class="color6" href="#"></a></li>
+						<li><a class="color7" href="#"></a></li>
+						<li><a class="color8" href="#"></a></li>
+						<li><a class="color9" href="#"></a></li>
+						<li><a class="color10" href="#"></a></li>
+						<li><a class="color12" href="#"></a></li>
+						<li><a class="color13" href="#"></a></li>
+						<li><a class="color14" href="#"></a></li>
+						<li><a class="color15" href="#"></a></li>
+						<li><a class="color5" href="#"></a></li>
+						<li><a class="color6" href="#"></a></li>
+						<li><a class="color7" href="#"></a></li>
+						<li><a class="color8" href="#"></a></li>
+						<li><a class="color9" href="#"></a></li>
+						<li><a class="color10" href="#"></a></li>
+					</ul>
+				</section>
+				<section class="sky-form">
+					<h4>discount</h4>
+					<div class="row1 row2 scroll-pane">
+						<div class="col col-4">
+							<label class="radio"><input type="radio" name="radio" checked=""><i></i>60 % and
+								above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>50 % and above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>40 % and above</label>
+						</div>
+						<div class="col col-4">
+							<label class="radio"><input type="radio" name="radio"><i></i>30 % and above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>20 % and above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>10 % and above</label>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</div>
+</div>
 </div>
 <!--end-single-->

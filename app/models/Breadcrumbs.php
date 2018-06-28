@@ -17,7 +17,16 @@ class Breadcrumbs
     {
         $cats = App::$app->getProperty('categories');
         $breadcrumbs_arr = self::getParts($cats, $category_id);
-        debug($breadcrumbs_arr);
+       $breadcrumbs = "<li><a href='". PATH .  " ' > Главная</a></li>";
+       if($breadcrumbs_arr){
+           foreach ($breadcrumbs_arr as $k => $v){
+               $breadcrumbs .= "<li><a href='" . PATH . "category/{$k}'>{$v}</a></li>";
+           }
+       }
+       if($title){
+           $breadcrumbs .= "<li class='active'>{$title}</li>";
+       }
+       return $breadcrumbs;
 
     }
 
