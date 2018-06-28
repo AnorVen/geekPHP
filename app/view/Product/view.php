@@ -89,6 +89,7 @@
 
 											<?php foreach ($mods as $item => $val): ?>
 											<option>
+												<?=$item['title']?>
 
 											</option>
 											<?php endforeach ?>
