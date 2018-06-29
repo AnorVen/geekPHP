@@ -3221,11 +3221,13 @@ form .has-error .form-control{
 	margin:-100px 0 0 -100px;
 }
 
-.product-bottom h4 .old_price{
+.product-bottom h4 .old_price,
+.product-bottom h4 .old_price-symbol{
 	color: red;
 	text-decoration: line-through;
 }
-.old_price{
+.old_price,
+.old_price-symbol{
 	color: red;
 	text-decoration: line-through;
 }
@@ -3234,3 +3236,4 @@ img{
 	height: auto;
 	max-width: 100%;
 }
+

@@ -53,7 +53,9 @@
 					</div>
 					<div class="col-md-7 single-top-right">
 						<div class="single-para simpleCart_shelfItem product">
-							<h2><?= $product['title'] ?></h2>
+							<h2 class="item__title" data-title="<?= $product['title'] ?>">
+                  <?= $product['title'] ?>
+							</h2>
 							<div class="star-on">
 								<ul class="star-footer">
 									<li><a href="#"><i> </i></a></li>
@@ -70,35 +72,58 @@
 							</div>
 
 							<h5 class="item_price">
-								<span
-										class="">
-													<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $product->price * $curr['value'] : $product->price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
-											</span>
+                  <?php if ($curr['symbol_left']): ?>
+										<span><?= $curr['symbol_left'] . ' ' ?></span>
+										<span class="item_price--new"
+													data-price="<?= $product->price * $curr['value'] ?>">
+													<?= $product->price * $curr['value'] ?>
+										</span>
+                  <?php else: ?>
+										<span class="item_price--new"
+													data-price="<?= $product->price * $curr['value'] ?>">
+													<?= $product->price * $curr['value'] ?>
+										</span>
+										<span><?= $curr['symbol_right'] . ' ' ?></span>
+                  <?php endif; ?>
                   <?php if ($product->old_price != 0): ?>
-										<span class="old_price">
-															<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $product->old_price * $curr['value'] : $product->old_price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
+                      <?php if ($curr['symbol_left']): ?>
+												<span class="old_price-symbol"><?= $curr['symbol_left'] . ' ' ?></span>
+											<span class="old_price"
+														data-priceOld="<?=$product->old_price * $curr['value'];?>">
+															<?=$product->old_price * $curr['value'];?>
 													</span>
+                      <?php else: ?>
+
+											<span class="old_price"
+														data-priceOld="<?= $product->old_price * $curr['value']; ?>">
+															<?= $product->old_price * $curr['value']; ?>
+													</span>
+											<span class="old_price-symbol"><?= $curr['symbol_right'] . ' ' ?></span>
+                      <?php endif; ?>
                   <?php endif ?>
 							</h5>
 							<p><?= $product->content ?></p>
-							<div class="available">
-								<ul>
-									<li>Color
-										<select>
-											<option value="0">выбрать цвет</option>
+                <?php if ($mods): ?>
+									<div class="available">
+										<ul>
+											<li>Color
+												<select>
+													<option value="0">выбрать цвет</option>
+                            <?php foreach ($mods as $mod): ?>
+															<option data-title="<?= $mod->title; ?>"
+																			data-price="<?= $mod->price * $curr['value']; ?>"
+																			value="<?= $mod->id ?>">
+                                  <?= $mod->title; ?>
 
-											<?php foreach ($mods as $item => $val): ?>
-											<option>
-												<?=$item['title']?>
+															</option>
+                            <?php endforeach ?>
 
-											</option>
-											<?php endforeach ?>
-
-										</select>
-									</li>
-									<div class="clearfix"></div>
-								</ul>
-							</div>
+												</select>
+											</li>
+											<div class="clearfix"></div>
+										</ul>
+									</div>
+                <?php endif; ?>
 							<ul class="tag-men">
 								<li><span>Category</span>
 									<span>: <a href="<?= $cats[$product->category_id]['alias'] ?>">
