@@ -51,3 +51,35 @@ $('.available select').on('change', function () {
 
 
 });
+
+//cart
+
+$('body').on('click', '.add-to-cart-link', function (e) {
+  e.preventDefault();
+  var id = $(this).data('id');
+  var qty = $('.quantity input').val() ? $('.quantity input').val() : 1;
+  var mod = $('.available select').val() ?  $('.available select').val() : 0;
+  $.ajax({
+    url: '/cart/add',
+    data: {
+      id: id,
+      qty: qty,
+      mod: mod
+    },
+    type: 'POST',
+    success: function (res) {
+      showCart(res);
+    },
+    error: function () {
+      window.location = 'http://gu//404.php'
+
+    }
+  })
+
+});
+
+function showCart(cart) {
+  console.log(cart)
+
+}
+

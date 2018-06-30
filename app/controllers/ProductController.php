@@ -51,7 +51,6 @@ class ProductController extends AppController
         //получить все модификации товара, если есть
 
         $mods = R::findAll('modification','product_id = ?', [$product->id]);
-        debug($mods);
 
 
 
