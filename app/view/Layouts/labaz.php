@@ -45,16 +45,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 			<div class="col-md-6 top-header-left">
 				<div class="cart box_1">
-					<a href="cart/show" id="cart">
+					<a href="cart/show" onclick="getCart(); return false;">
 						<div class="total">
 							<span class="simpleCart_total">
-								 <?php if ($curr['symbol_left']): ?>
+								<?php if(isset($_SESSION['cart.sum'])): ?>
+									<?php if ($curr['symbol_left']): ?>
 									 <span><?= $curr['symbol_left'] . ' ' ?></span>
-                     <?=isset($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] : 'Empty Cart'?>
+                     <?=$_SESSION['cart.sum'];?>
                  <?php else: ?>
-                     <?=isset($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] : 'Empty Cart'?>
-									 <span><?= $curr['symbol_right'] . ' ' ?></span>
+                     <?=$_SESSION['cart.sum'];?>
+									 <span><?=' ' . $curr['symbol_right']?></span>
                  <?php endif; ?>
+								<?php else:?>
+								<span>Empty Cart</span>
+								<?php endif;?>
+
 							</span></div>
 						<img src="/images/cart-1.png" alt=""/>
 					</a>
@@ -205,6 +210,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/js/main.js"></script>
 
 <?php
+debug($_SESSION);
 
 $logs = \RedBeanPHP\R::getDatabaseAdapter()->getDatabase()->getLogger();
 debug( $logs->grep('SELECT'))

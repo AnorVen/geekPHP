@@ -55,44 +55,13 @@ $('.available select').on('change', function () {
 
 //cart
 
-$('body').on('click', '.add-to-cart-link', function (e) {
-  e.preventDefault();
-  var id = $(this).data('id');
-  var qty = $('.quantity input').val() ? $('.quantity input').val() : 1;
-  var mod = $('.available select').val() ?  $('.available select').val() : 0;
-  $.ajax({
-    url: '/cart/add',
-    data: {
-      id: id,
-      qty: qty,
-      mod: mod
-    },
-    type: 'POST',
-    success: function (res) {
-      showCart(res);
-    },
-    error: function () {
-      window.location = 'http://gu//404.php'
-
-    }
-  })
-
-});
-
-function showCart(cart) {
-  console.log(cart)
-
-
-}
-
-
-
 
 function getCart() {
   $.ajax({
     url: '/cart/show',
     type: 'GET',
     success: function(res){
+      console.log(res);
       showCart(res);
     },
     error: function(){
@@ -100,6 +69,7 @@ function getCart() {
     }
   });
 }
+
 
 /*Cart*/
 $('body').on('click', '.add-to-cart-link', function(e){
@@ -112,13 +82,28 @@ $('body').on('click', '.add-to-cart-link', function(e){
     data: {id: id, qty: qty, mod: mod},
     type: 'GET',
     success: function(res){
-      showCart(res);
+     // showCart(res);
+      addProductToCart(res);
+
     },
     error: function(){
       alert('Ошибка! Попробуйте позже');
     }
   });
 });
+
+function addProductToCart(cart){
+  $('#cart .modal-body').html(cart);
+  if($('.cart-sum').text()){
+    if($('.cart-sum').text() === "$ 0"){
+      $('.simpleCart_total').text('Empty Cart');
+    } else {
+      $('.simpleCart_total').html($('#cart .cart-sum').text());
+    }
+  }else{
+    $('.simpleCart_total').text('Empty Cart');
+  }
+}
 
 $('#cart .modal-body').on('click', '.del-item', function(){
   var id = $(this).data('id');
@@ -141,13 +126,8 @@ function showCart(cart){
   }else{
     $('#cart .modal-footer a, #cart .modal-footer .btn-danger').css('display', 'inline-block');
   }
-  $('#cart .modal-body').html(cart);
+  addProductToCart(cart);
   $('#cart').modal();
-  if($('.cart-sum').text()){
-    $('.simpleCart_total').html($('#cart .cart-sum').text());
-  }else{
-    $('.simpleCart_total').text('Empty Cart');
-  }
 }
 
 function getCart() {
