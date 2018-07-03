@@ -24,13 +24,13 @@ class AppController extends Controller
         App::$app->setProperty('currencies', Currency::getCurrencies());
         App::$app->setProperty('currency', Currency::getCurrency(App::$app->getProperty('currencies')));
 
-        App::$app->setProperty('categoryes', self::CacheCategory());
+        App::$app->setProperty('categories', self::CacheCategory());
     }
 
     static function CacheCategory()
     {
         $cache = Cache::instance();
-        $categories = $cache->get('categoryes');
+        $categories = $cache->get('categories');
         if (!$categories) {
             $categories = R::getAssoc("SELECT * FROM category");
             $cache->set('categories', $categories);

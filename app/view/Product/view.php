@@ -3,46 +3,59 @@
 	<div class="container">
 		<div class="breadcrumbs-main">
 			<ol class="breadcrumb">
-				<li><a href="<?= PATH ?>">Home</a></li>
-				<li class="active">Single</li>
+				<!--	<li><a href="<? /*= PATH */ ?>">Home</a></li>
+				<li><a href="<? /*= PATH */ ?>">Home</a></li>
+				<li class="active">Single</li>-->
+
+          <?= $breadcrumbs ?>
 			</ol>
 		</div>
 	</div>
 </div>
 <!--end-breadcrumbs-->
 <!--start-single-->
+<!--start-single-->
+<!--start-single-->
+<!--start-single-->
 
 <?php $curr = \shop\App::$app->getProperty('currency'); ?>
-<?php $cats = \shop\App::$app->getProperty('categories'); ?>
+<?php $cats = \shop\App::$app->getProperty('categories');
+?>
 <div class="single contact">
 	<div class="container">
 		<div class="single-main">
-        <?= debug($product); ?>
 			<div class="col-md-9 single-main-left">
 				<div class="sngl-top">
 					<div class="col-md-5 single-top-left">
-						<div class="flexslider">
-							<ul class="slides">
-								<li data-thumb="/images/s-1.jpg">
-									<div class="thumb-image"><img src="/images/s-1.jpg" data-imagezoom="true"
-																								class="img-responsive" alt=""/></div>
-								</li>
-								<li data-thumb="/images/s-2.jpg">
-									<div class="thumb-image"><img src="/images/s-2.jpg" data-imagezoom="true"
-																								class="img-responsive" alt=""/></div>
-								</li>
-								<li data-thumb="/images/s-3.jpg">
-									<div class="thumb-image"><img src="/images/s-3.jpg" data-imagezoom="true"
-																								class="img-responsive" alt=""/></div>
-								</li>
-							</ul>
-						</div>
-						<!-- FlexSlider -->
 
+              <?php if ($gallery): ?>
+								<div class="flexslider">
+									<ul class="slides">
+                      <?php foreach ($gallery as $img): ?>
+												<li data-thumb="/images/<?= $img->img ?>">
+													<div class="thumb-image">
+														<img src="/images/<?= $img->img ?>" data-imagezoom="true"
+																 class="img-responsive" alt=""/></div>
+												</li>
+                      <?php endforeach; ?>
+
+									</ul>
+								</div>
+
+
+								<!-- FlexSlider -->
+
+              <?php else: ?>
+								<img src="/images/<?= $product->img ?>" alt="">
+
+
+              <?php endif; ?>
 					</div>
 					<div class="col-md-7 single-top-right">
 						<div class="single-para simpleCart_shelfItem product">
-							<h2><?=$product['title'] ?></h2>
+							<h2 class="item__title" data-title="<?= $product['title'] ?>">
+                  <?= $product['title'] ?>
+							</h2>
 							<div class="star-on">
 								<ul class="star-footer">
 									<li><a href="#"><i> </i></a></li>
@@ -59,46 +72,72 @@
 							</div>
 
 							<h5 class="item_price">
-								<span
-										class="">
-													<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $product->price * $curr['value'] : $product->price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
-											</span>
+                  <?php if ($curr['symbol_left']): ?>
+										<span><?= $curr['symbol_left'] . ' ' ?></span>
+										<span class="item_price--new"
+													data-price="<?= $product->price * $curr['value'] ?>">
+													<?= $product->price * $curr['value'] ?>
+										</span>
+                  <?php else: ?>
+										<span class="item_price--new"
+													data-price="<?= $product->price * $curr['value'] ?>">
+													<?= $product->price * $curr['value'] ?>
+										</span>
+										<span><?= $curr['symbol_right'] . ' ' ?></span>
+                  <?php endif; ?>
                   <?php if ($product->old_price != 0): ?>
-										<span class="old_price">
-															<?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $product->old_price * $curr['value'] : $product->old_price * $curr['value'] . ' ' . $curr['symbol_right'] ?>
+                      <?php if ($curr['symbol_left']): ?>
+												<span class="old_price-symbol"><?= $curr['symbol_left'] . ' ' ?></span>
+											<span class="old_price"
+														data-priceOld="<?=$product->old_price * $curr['value'];?>">
+															<?=$product->old_price * $curr['value'];?>
 													</span>
+                      <?php else: ?>
+
+											<span class="old_price"
+														data-priceOld="<?= $product->old_price * $curr['value']; ?>">
+															<?= $product->old_price * $curr['value']; ?>
+													</span>
+											<span class="old_price-symbol"><?= $curr['symbol_right'] . ' ' ?></span>
+                      <?php endif; ?>
                   <?php endif ?>
 							</h5>
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-								euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-								minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-								aliquip ex ea commodo consequat.</p>
-							<div class="available">
-								<ul>
-									<li>Color
-										<select>
-											<option>Silver</option>
-											<option>Black</option>
-											<option>Dark Black</option>
-											<option>Red</option>
-										</select></li>
-									<li class="size-in">Size<select>
-											<option>Large</option>
-											<option>Medium</option>
-											<option>small</option>
-											<option>Large</option>
-											<option>small</option>
-										</select></li>
-									<div class="clearfix"></div>
-								</ul>
-							</div>
+							<p><?= $product->content ?></p>
+                <?php if ($mods): ?>
+									<div class="available">
+										<ul>
+											<li>Color
+												<select>
+													<option value="0">выбрать цвет</option>
+                            <?php foreach ($mods as $mod): ?>
+															<option data-title="<?= $mod->title; ?>"
+																			data-price="<?= $mod->price * $curr['value']; ?>"
+																			value="<?= $mod->id ?>">
+                                  <?= $mod->title; ?>
+
+															</option>
+                            <?php endforeach ?>
+
+												</select>
+											</li>
+											<div class="clearfix"></div>
+										</ul>
+									</div>
+                <?php endif; ?>
 							<ul class="tag-men">
-								<li><span>TAG</span>
-									<span class="women1">: Women,</span></li>
-								<li><span>SKU</span>
-									<span class="women1">: CK09</span></li>
+								<li><span>Category</span>
+									<span>: <a href="<?= $cats[$product->category_id]['alias'] ?>">
+											"<?= $cats[$product->category_id]['title'] ?>
+										</a></span></li>
 							</ul>
-							<a href="#" class="add-cart item_add">ADD TO CART</a>
+							<div class="quantity">
+								<input type="number" size="4" class="input-text" value="1" name="quantity" min="1"
+											 step="1">
+								<a href="/card/add?id=<?= $product->id ?>" id="productAdd"
+									 data-id="<?= $product->id ?>" class="add-cart item_add add-to-cart-link">ADD TO
+									CART</a>
+							</div>
+
 
 						</div>
 					</div>
@@ -180,144 +219,161 @@
 						</li>
 					</ul>
 				</div>
-				<div class="latestproducts">
-					<div class="product-one">
-						<div class="col-md-4 product-left p-left">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="single.html" class="mask"><img class="img-responsive zoom-img"
-																												src="/images/p-1.png" alt=""/></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
+
+          <?php if ($related): ?>
+						<div class="latestproducts">
+
+							<div class="product-one">
+								<h4>recomendet product</h4>
+                  <?php foreach ($related as $item): ?>
+										<div class="col-md-4 product-left p-left">
+											<div class="product-main simpleCart_shelfItem">
+												<a href="/product/<?= $item['alias'] ?>" class="mask">
+													<img class="img-responsive zoom-img"
+															 src="/images/<?= /*file_exists('/images/' . $item['img']) ? $item['img'] : 'no_image.jpg'*/
+                               $item['img'] ?>" alt=""/></a>
+												<div class="product-bottom">
+													<h3><?= $item['title'] ?></h3>
+													<p>Explore Now</p>
+
+													<h4><a href="/card/add?id=<?= $item['id'] ?>" id="productAdd"
+																 data-id="<?= $item['id'] ?>"
+																 class="add-cart item_add add-to-cart-link">ADD TO CART</a></h4>
+													<p class=" item_price">  <?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
+												</div>
+												<div class="srch">
+													<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
+												</div>
+											</div>
+										</div>
+                  <?php endforeach; ?>
+								<div class="clearfix"></div>
 							</div>
 						</div>
-						<div class="col-md-4 product-left p-left">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="single.html" class="mask"><img class="img-responsive zoom-img"
-																												src="/images/p-2.png" alt=""/></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
+          <?php endif; ?>
+
+          <?php if ($recentlyViewed): ?>
+						<div class="latestproducts">
+
+							<div class="product-one">
+								<h4>recentlyViewed</h4>
+                  <?php foreach ($recentlyViewed as $item): ?>
+										<div class="col-md-4 product-left p-left">
+											<div class="product-main simpleCart_shelfItem">
+												<a href="/product/<?= $item['alias'] ?>" class="mask">
+													<img class="img-responsive zoom-img"
+															 src="/images/<?= /*file_exists('/images/' . $item['img']) ? $item['img'] : 'no_image.jpg'*/
+                               $item['img'] ?>" alt=""/></a>
+												<div class="product-bottom">
+													<h3><?= $item['title'] ?></h3>
+													<p>Explore Now</p>
+
+													<h4><a href="/card/add?id=<?= $item['id'] ?>" id="productAdd"
+																 data-id="<?= $item['id'] ?>"
+																 class="add-cart item_add add-to-cart-link">ADD TO CART</a></h4>
+													<p class=" item_price">  <?= $curr['symbol_left'] ? $curr['symbol_left'] . ' ' . $item['price'] * $curr['value'] : $item['price'] * $curr['value'] . ' ' . $curr['symbol_right'] ?></p>
+												</div>
+												<div class="srch">
+													<span><?= $item['old_price'] ? (round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) != 0 ? round(($item['old_price'] - $item['price']) / $item['old_price'] * 100) : '10') . '%' : 'Ваще нужно X)' ?></span>
+												</div>
+											</div>
+										</div>
+                  <?php endforeach; ?>
+								<div class="clearfix"></div>
 							</div>
 						</div>
-						<div class="col-md-4 product-left p-left">
-							<div class="product-main simpleCart_shelfItem">
-								<a href="single.html" class="mask"><img class="img-responsive zoom-img"
-																												src="/images/p-3.png" alt=""/></a>
-								<div class="product-bottom">
-									<h3>Smart Watches</h3>
-									<p>Explore Now</p>
-									<h4><a class="item_add" href="#"><i></i></a> <span
-												class=" item_price">$ 329</span></h4>
-								</div>
-								<div class="srch">
-									<span>-50%</span>
-								</div>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
+          <?php endif; ?>
 			</div>
-			<div class="col-md-3 single-right">
-				<div class="w_sidebar">
-					<section class="sky-form">
-						<h4>Catogories</h4>
-						<div class="row1 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>All
-									Accessories</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Women Watches</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kids
-									Watches</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Men
-									Watches</label>
-							</div>
-						</div>
-					</section>
-					<section class="sky-form">
-						<h4>Brand</h4>
-						<div class="row1 row2 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>kurtas</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sonata</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Titan</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Casio</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Omax</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>shree</label>
-								<label class="checkbox"><input type="checkbox"
-																							 name="checkbox"><i></i>Fastrack</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sports</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Fossil</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Maxima</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Yepme</label>
-								<label class="checkbox"><input type="checkbox"
-																							 name="checkbox"><i></i>Citizen</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Diesel</label>
-							</div>
-						</div>
-					</section>
-					<section class="sky-form">
-						<h4>Colour</h4>
-						<ul class="w_nav2">
-							<li><a class="color1" href="#"></a></li>
-							<li><a class="color2" href="#"></a></li>
-							<li><a class="color3" href="#"></a></li>
-							<li><a class="color4" href="#"></a></li>
-							<li><a class="color5" href="#"></a></li>
-							<li><a class="color6" href="#"></a></li>
-							<li><a class="color7" href="#"></a></li>
-							<li><a class="color8" href="#"></a></li>
-							<li><a class="color9" href="#"></a></li>
-							<li><a class="color10" href="#"></a></li>
-							<li><a class="color12" href="#"></a></li>
-							<li><a class="color13" href="#"></a></li>
-							<li><a class="color14" href="#"></a></li>
-							<li><a class="color15" href="#"></a></li>
-							<li><a class="color5" href="#"></a></li>
-							<li><a class="color6" href="#"></a></li>
-							<li><a class="color7" href="#"></a></li>
-							<li><a class="color8" href="#"></a></li>
-							<li><a class="color9" href="#"></a></li>
-							<li><a class="color10" href="#"></a></li>
-						</ul>
-					</section>
-					<section class="sky-form">
-						<h4>discount</h4>
-						<div class="row1 row2 scroll-pane">
-							<div class="col col-4">
-								<label class="radio"><input type="radio" name="radio" checked=""><i></i>60 % and
-									above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>50 % and above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>40 % and above</label>
-							</div>
-							<div class="col col-4">
-								<label class="radio"><input type="radio" name="radio"><i></i>30 % and above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>20 % and above</label>
-								<label class="radio"><input type="radio" name="radio"><i></i>10 % and above</label>
-							</div>
-						</div>
-					</section>
-				</div>
-			</div>
-			<div class="clearfix"></div>
+
 		</div>
+		<div class="col-md-3 single-right">
+			<div class="w_sidebar">
+				<section class="sky-form">
+					<h4>Catogories</h4>
+					<div class="row1 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>All
+								Accessories</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Women
+								Watches</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Kids
+								Watches</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Men
+								Watches</label>
+						</div>
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>Brand</h4>
+					<div class="row1 row2 scroll-pane">
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>kurtas</label>
+						</div>
+						<div class="col col-4">
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sonata</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Titan</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Casio</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Omax</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>shree</label>
+							<label class="checkbox"><input type="checkbox"
+																						 name="checkbox"><i></i>Fastrack</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Sports</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Fossil</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Maxima</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Yepme</label>
+							<label class="checkbox"><input type="checkbox"
+																						 name="checkbox"><i></i>Citizen</label>
+							<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Diesel</label>
+						</div>
+					</div>
+				</section>
+				<section class="sky-form">
+					<h4>Colour</h4>
+					<ul class="w_nav2">
+						<li><a class="color1" href="#"></a></li>
+						<li><a class="color2" href="#"></a></li>
+						<li><a class="color3" href="#"></a></li>
+						<li><a class="color4" href="#"></a></li>
+						<li><a class="color5" href="#"></a></li>
+						<li><a class="color6" href="#"></a></li>
+						<li><a class="color7" href="#"></a></li>
+						<li><a class="color8" href="#"></a></li>
+						<li><a class="color9" href="#"></a></li>
+						<li><a class="color10" href="#"></a></li>
+						<li><a class="color12" href="#"></a></li>
+						<li><a class="color13" href="#"></a></li>
+						<li><a class="color14" href="#"></a></li>
+						<li><a class="color15" href="#"></a></li>
+						<li><a class="color5" href="#"></a></li>
+						<li><a class="color6" href="#"></a></li>
+						<li><a class="color7" href="#"></a></li>
+						<li><a class="color8" href="#"></a></li>
+						<li><a class="color9" href="#"></a></li>
+						<li><a class="color10" href="#"></a></li>
+					</ul>
+				</section>
+				<section class="sky-form">
+					<h4>discount</h4>
+					<div class="row1 row2 scroll-pane">
+						<div class="col col-4">
+							<label class="radio"><input type="radio" name="radio" checked=""><i></i>60 % and
+								above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>50 % and above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>40 % and above</label>
+						</div>
+						<div class="col col-4">
+							<label class="radio"><input type="radio" name="radio"><i></i>30 % and above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>20 % and above</label>
+							<label class="radio"><input type="radio" name="radio"><i></i>10 % and above</label>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</div>
+</div>
 </div>
 <!--end-single-->
