@@ -18,7 +18,7 @@ class SearchController extends AppController
         if ($this->isAjax()) {
             $query = !empty(trim($_GET['query'])) ? $_GET['query'] : NULL;
             if ($query) {
-                $products = R::getAll('SELECT id, title FROM product WHERE title LIKE ? LIMIT 20', ["%{$query}%"]);
+                $products = R::getAll('SELECT id, title FROM product WHERE title LIKE ? LIMIT 10', ["%{$query}%"]);
                 echo json_encode($products);
             }
         }
@@ -27,9 +27,9 @@ class SearchController extends AppController
 
     public function indexAction()
     {
-        $query = !empty(trim($_GET['s'])) ? $_GET['query'] : NULL;
+        $query = !empty(trim($_GET['s'])) ? trim($_GET['s']) : NULL;
         if ($query) {
-            $products = R::find("'product' title LIKE ?", ["%{$query}%"]);
+            $products = R::find('product','title LIKE ?', ["%{$query}%"]);
             echo json_encode($products);
         }
         $this->setMeta('Поиск по ' . h($query), 'search desc', 'search keywords');
