@@ -9,6 +9,7 @@
 namespace shop\base;
 
 
+use RedBeanPHP\R;
 use shop\Db;
 use Valitron\Validator;
 
@@ -30,6 +31,15 @@ abstract class Model
                 $this->attributes[$k] = $data[$k];
             }
         }
+    }
+
+
+    public function safe($table){
+        $tbl = R::dispense($table);
+        foreach ($this->attributes as $name => $value){
+            $tbl->$name = $value;
+        }
+        return R::store($tbl);
     }
 
     public function validate($data){

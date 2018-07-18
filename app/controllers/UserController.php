@@ -15,16 +15,26 @@ class UserController extends AppController
 {
     public function signupAction()
     {
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             $user = new User();
             $data = $_POST;
             $user->load($data);
-            if(!$user->validate($data)){
-               $user->getErrors();
-               redirect();
-            } else{
-                $_SESSION['success'] = 'Ok!';
+            if (!$user->validate($data) || !$user->checkunic()) {
+                $user->getErrors();
+            } else {
+                $user->attributes['password'] = password_hash($user->attributes['password'], PASSWORD_DEFAULT);
+
+
+                if ($user->safe('user')) {
+                    $_SESSION['success'] = 'Ok!';
+
+                } else {
+                    $_SESSION['error'] = 'проблема с базой';
+
+                }
+
             }
+            redirect();
         }
         $this->setMeta('rega');
     }
