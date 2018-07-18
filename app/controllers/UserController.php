@@ -15,10 +15,16 @@ class UserController extends AppController
 {
     public function signupAction()
     {
-        if(!empty($_GET['user'])){
+        if(!empty($_POST)){
             $user = new User();
             $data = $_POST;
             $user->load($data);
+            if(!$user->validate($data)){
+               $user->getErrors();
+               redirect();
+            } else{
+                $_SESSION['success'] = 'Ok!';
+            }
         }
         $this->setMeta('rega');
     }
@@ -29,11 +35,6 @@ class UserController extends AppController
 
     public function logoutAction()
     {
-    }
-
-    public function registerAction()
-    {
-
     }
 
 }
