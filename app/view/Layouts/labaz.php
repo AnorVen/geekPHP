@@ -32,13 +32,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <?php new \app\widgets\currency\Currency(); ?>
 						</select>
 					</div>
-					<div class="box1">
+					<!--<div class="box1">
 						<select tabindex="4" class="dropdown">
 							<option value="" class="label">English :</option>
 							<option value="1">English</option>
 							<option value="2">French</option>
 							<option value="3">German</option>
 						</select>
+					</div>-->
+					<div class="btn-group">
+						<a data-toggle="dropdown" class="dropdown-toggle">Аккаунт
+							<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+								<?php if(!empty($_SERVER['user'])): ?>
+								<li><a href="#">Добро пожаловать, <?=h($_SESSION['user']['name'])?></a></li>
+								<li><a href="/user/logout">Выход</a></li>
+
+								<?php else:?>
+									<li><a href="/user/login">вход</a></li>
+									<li><a href="/user/signup">Рега</a></li>
+							<?php endif;?>
+						</ul>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -48,17 +62,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<a href="cart/show" onclick="getCart(); return false;">
 						<div class="total">
 							<span class="simpleCart_total">
-								<?php if(isset($_SESSION['cart.sum'])): ?>
-									<?php if ($curr['symbol_left']): ?>
-									 <span><?= $curr['symbol_left'] . ' ' ?></span>
-                     <?=$_SESSION['cart.sum'];?>
-                 <?php else: ?>
-                     <?=$_SESSION['cart.sum'];?>
-									 <span><?=' ' . $curr['symbol_right']?></span>
-                 <?php endif; ?>
-								<?php else:?>
-								<span>Empty Cart</span>
-								<?php endif;?>
+								<?php if (isset($_SESSION['cart.sum'])): ?>
+                    <?php if ($curr['symbol_left']): ?>
+										<span><?= $curr['symbol_left'] . ' ' ?></span>
+                        <?= $_SESSION['cart.sum']; ?>
+                    <?php else: ?>
+                        <?= $_SESSION['cart.sum']; ?>
+										<span><?= ' ' . $curr['symbol_right'] ?></span>
+                    <?php endif; ?>
+                <?php else: ?>
+									<span>Empty Cart</span>
+                <?php endif; ?>
 
 							</span></div>
 						<img src="/images/cart-1.png" alt=""/>
@@ -97,7 +111,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<form action="search" method="get" autocomplete="off">
 						<input type="text" value="Search" onfocus="this.value = '';"
 									 onblur="if (this.value == '') {this.value = 'Search';}" class="typeahead"
-						id="typeahead" name="s">
+									 id="typeahead" name="s">
 						<input type="submit" value="">
 					</form>
 
@@ -185,14 +199,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Корзина</h4>
 			</div>
 			<div class="modal-body">
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки
+				</button>
 				<a href="cart/view" type="button" class="btn btn-primary">Оформить заказ</a>
 				<button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>
 			</div>
@@ -200,7 +216,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 </div>
 <script>
-	var path = '<?=PATH?>'
+  var path = '<?=PATH?>'
 </script>
 
 <script src="/js/jquery-1.11.0.min.js"></script>
@@ -221,7 +237,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 debug($_SESSION);
 
 $logs = \RedBeanPHP\R::getDatabaseAdapter()->getDatabase()->getLogger();
-debug( $logs->grep('SELECT'))
+debug($logs->grep('SELECT'))
 ?>
 <!--End-slider-script-->
 </body>

@@ -23,4 +23,12 @@ abstract class Model
 
     }
 
+    public function load($data){
+        foreach ($this->attributes as $k=>$v){
+            if(isset($data[$k])){
+                $this->attributes[$k] = $data[$k];
+            }
+        }
+    }
+
 }

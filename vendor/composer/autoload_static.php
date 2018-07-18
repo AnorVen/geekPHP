@@ -19,6 +19,10 @@ class ComposerStaticInit1937875afc965c1c1f04ca3f89337ad9
         array (
             'app\\' => 4,
         ),
+        'V' => 
+        array (
+            'Valitron\\' => 9,
+        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -45,6 +49,10 @@ class ComposerStaticInit1937875afc965c1c1f04ca3f89337ad9
         'app\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+        'Valitron\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/valitron/src/Valitron',
         ),
         'Twig\\' => 
         array (
