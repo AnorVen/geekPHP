@@ -16,6 +16,7 @@
         <div class="prdt-top">
             <div class="col-md-9 prdt-left">
                 <?php if(!empty($products)): ?>
+								<h6><?=$pagination->total;?> товарa(ов) в данной категории</h6>
                     <div class="product-one">
                         <?php $curr = \shop\App::$app->getProperty('currency'); ?>
                         <?php foreach($products as $product): ?>
@@ -39,6 +40,11 @@
                             </div>
                         <?php endforeach; ?>
                         <div class="clearfix"></div>
+											<div class="text-center">
+												<?php if($pagination->countPages > 1) :?>
+													<?=$pagination?>
+												<?php endif;?>
+											</div>
                     </div>
                 <?php else:?>
                 <h3>Категория пока что пуста</h3>
