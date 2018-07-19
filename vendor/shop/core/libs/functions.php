@@ -15,5 +15,5 @@ function redirect($http = false){
 }
 
 function h($str){
-    htmlspecialchars($str, ENT_QUOTES);
+   return htmlspecialchars($str, ENT_QUOTES);
 }
