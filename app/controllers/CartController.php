@@ -10,10 +10,47 @@ namespace app\controllers;
 
 
 use app\models\Cart;
+use app\models\Order;
+use app\models\User;
 use RedBeanPHP\R;
 
 class CartController extends AppController
 {
+
+    public function viewAction(){
+        $this->setMeta('cart');
+    }
+    public function checkoutAction(){
+        if(!empty($_POST)){
+            //проверка авторизации
+            if(!User::checkAuth()){
+                $user = new User();
+                $data = $_POST;
+                $user->load($data);
+                if (!$user->validate($data) || !$user->checkunic()) {
+                    $user->getErrors();
+                    $_SESSION['form_data'] = $data;
+                    redirect();
+                } else {
+                    $user->attributes['password'] = password_hash($user->attributes['password'], PASSWORD_DEFAULT);
+                    if (!$user_id = $user->safe('user')) {
+                        $_SESSION['error'] = 'проблема с базой';
+                        redirect();
+                    }
+                }
+            }
+
+            //сохранение заказа
+            $data['user_id'] = isset($user_id) ? isset($user_id) : $_SESSION['user']['id'];
+            $data['note'] = !empty($_POST['note']) ? $_POST['note'] : '';
+            $user_email = isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : $_POST['email'];
+            $order_id = Order::saveOrder($data);
+            Order::mailOrder($order_id, $user_email);
+
+
+        }
+        redirect();
+    }
     public function addAction()
     {
         $id = !empty($_GET['id']) ? (int)$_GET['id'] : null;

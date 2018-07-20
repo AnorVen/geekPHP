@@ -21,6 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
+<?php $curr = \shop\App::$app->getProperty('currency'); ?>
 <!--top-header-->
 <div class="top-header">
 	<div class="container">
