@@ -27,7 +27,9 @@ class UserController extends AppController
 
 
                 if ($user->safe('user')) {
+                    $this->loginAction();
                     $_SESSION['success'] = 'Ok!';
+
 
                 } else {
                     $_SESSION['error'] = 'проблема с базой';
@@ -42,10 +44,25 @@ class UserController extends AppController
 
     public function loginAction()
     {
+        $this->setMeta('вход');
+        if (!empty($_POST)) {
+            $user = new User();
+            if ($user->login()) {
+                $_SESSION['success'] = 'Авторизация успешна';
+            } else {
+                $_SESSION['error'] = 'логин или пароль не верные';
+            }
+            redirect();
+
+        }
     }
 
     public function logoutAction()
     {
+        if(!empty($_SESSION['user'])){
+            unset($_SESSION['user']);
+        }
+        redirect();
     }
 
 }

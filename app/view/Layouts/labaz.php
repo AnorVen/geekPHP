@@ -44,12 +44,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<a data-toggle="dropdown" class="dropdown-toggle">Аккаунт
 							<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-								<?php if(!empty($_SERVER['user'])): ?>
+								<?php if(!empty($_SESSION['user'])): ?>
 								<li><a href="#">Добро пожаловать, <?=h($_SESSION['user']['name'])?></a></li>
 								<li><a href="/user/logout">Выход</a></li>
 
 								<?php else:?>
-									<li><a href="/user/login">вход</a></li>
+									<li><a href="/user/login">Вход</a></li>
 									<li><a href="/user/signup">Рега</a></li>
 							<?php endif;?>
 						</ul>
